@@ -5,11 +5,8 @@ class Scene1 extends Phaser.Scene {
 
   preload(){
     this.load.image("background", "assets/images/background.png");
-    // 0 chnage the path to spritesheets
-    // this.load.image("ship", "assets/images/ship.png");
-    // this.load.image("ship2", "assets/images/ship2.png");
-    // this.load.image("ship3", "assets/images/ship3.png");
-    // to
+    
+    //Charging the zombie's images
     this.load.spritesheet("z1", "assets/spritesheets/z1.png",{
       frameWidth: 133,
       frameHeight: 133
@@ -26,9 +23,15 @@ class Scene1 extends Phaser.Scene {
       frameWidth: 133,
       frameHeight: 128
     });
+    //Charging the hunting's explosion
     this.load.spritesheet("explosion", "assets/spritesheets/explosion_.png",{
       frameWidth: 133,
       frameHeight: 133
+    });
+    //Charging the crows (Birds)
+    this.load.spritesheet("crow", "assets/spritesheets/crow.png",{
+      frameWidth: 97,
+      frameHeight: 120
     });
   }
 
