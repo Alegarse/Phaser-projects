@@ -24,11 +24,12 @@ class Scene2 extends Phaser.Scene {
     this.input.on('gameobjectdown', this.destroyShip, this);
 
     this.add.text(20, 20, "Playing game", {
-      font: "25px Arial",
+      font: "15px Arial",
       fill: "yellow"
     });
 
     this.physics.world.setBoundsCollision();
+
 
     this.powerUps = this.physics.add.group();
 
@@ -54,10 +55,20 @@ class Scene2 extends Phaser.Scene {
     // 2.1 ADD THE PLAYER SHIP
     this.player = this.physics.add.sprite(config.width / 2 - 8, config.height - 64, "player");
     this.player.play("thrust"); //Aqui ejecuta la animacion del player
+    this.player2 = this.physics.add.sprite(config.width / 2 - 8, config.height - 64, "player2");
+    this.player2.play("thrust2"); //Aqui ejecuta la animacion del player
     // 2.2 create the cursorKeys
     this.cursorKeys = this.input.keyboard.createCursorKeys(); //Así podemos manejarlo con el teclado
+    this.wasdKeys = this.input.keyboard.addKeys({
+      wKey:Phaser.Input.Keyboard.KeyCodes.W,
+      sKey:Phaser.Input.Keyboard.KeyCodes.S,
+      aKey:Phaser.Input.Keyboard.KeyCodes.A,
+      dKey:Phaser.Input.Keyboard.KeyCodes.D,
+      });
     // 3.3 don't let the player leave the screen
     this.player.setCollideWorldBounds(true); //Así no se va de los bordes
+    this.player2.setCollideWorldBounds(true);
+    this.physics.add.collider(this.player, this.player2);
 
 
     // 4.1  add a key for the player fire
@@ -102,6 +113,19 @@ class Scene2 extends Phaser.Scene {
       this.player.setVelocityY(-gameSettings.playerSpeed);
     }else if(this.cursorKeys.down.isDown){
       this.player.setVelocityY(gameSettings.playerSpeed);
+    }
+
+    this.player2.setVelocity(0);
+
+    if(this.wasdKeys.aKey.isDown){
+      this.player2.setVelocityX(-gameSettings.playerSpeed);
+    }else if(this.wasdKeys.dKey.isDown){
+      this.player2.setVelocityX(gameSettings.playerSpeed);
+    }
+    if(this.wasdKeys.wKey.isDown){
+      this.player2.setVelocityY(-gameSettings.playerSpeed);
+    }else if(this.wasdKeys.sKey.isDown){
+      this.player2.setVelocityY(gameSettings.playerSpeed);
     }
   }
 

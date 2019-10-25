@@ -26,19 +26,23 @@ class Scene1 extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 16
     });
-    // 1.1 load sprite spritesheets
     this.load.spritesheet("player", "assets/spritesheets/player.png",{
       frameWidth: 16,
       frameHeight: 24
     });
+    this.load.spritesheet("beam", "assets/spritesheets/beam.png",{
+      frameWidth: 16,
+      frameHeight: 16
+    });
+
+    // 1.2 load the font fies
+    this.load.bitmapFont("pixelFont", "assets/font/font.png", "assets/font/font.xml");
   }
 
   create() {
     this.add.text(20, 20, "Loading game...");
-    this.scene.start("playGame");
+    this.scene.start("Menu");
 
-
-    // 1.2 moved the creation of the animations to this scene
     this.anims.create({
       key: "ship1_anim",
       frames: this.anims.generateFrameNumbers("ship"),
@@ -84,11 +88,16 @@ class Scene1 extends Phaser.Scene {
       frameRate: 20,
       repeat: -1
     });
-
-    // 1.3 add the animation for the player
     this.anims.create({
       key: "thrust",
       frames: this.anims.generateFrameNumbers("player"),
+      frameRate: 20,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: "beam_anim",
+      frames: this.anims.generateFrameNumbers("beam"),
       frameRate: 20,
       repeat: -1
     });

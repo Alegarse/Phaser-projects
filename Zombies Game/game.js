@@ -4,7 +4,7 @@ var config = {
   backgroundColor: 0x000000,
   scene: [Scene1, Scene2],
   pixelArt: true,
-  // 1.1 set the physics to arcade
+  // Set Arcade's physics
   physics: {
     default: "arcade",
     arcade: {

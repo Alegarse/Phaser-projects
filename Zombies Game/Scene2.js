@@ -18,8 +18,12 @@ class Scene2 extends Phaser.Scene {
     // Set the players
     this.player1 = this.physics.add.sprite(config.width, config.height, "player1");
     this.player1.flipX = true;
+    // This line for limit the size of player1 in collide
+    this.player1.setSize(50,82);
     this.player2 = this.physics.add.sprite(config.width, config.height, "player2");
     this.player2.flipX = true;
+    // This line for limit the size of player2 in collide
+    this.player2.setSize(50,82);
 
     // Playing the animations
     this.z1.play("z1_anim");
@@ -40,9 +44,9 @@ class Scene2 extends Phaser.Scene {
     // Join the click action with the method
     this.input.on('gameobjectdown', this.destroyShip, this);
     // Typing the bottom text on the screen
-    this.add.text(20, 20, "Hunting zombies and crows", {
+    this.add.text(20, 20, "¡¡Hunting zombies and crows!!", {
       font: "22px Arial",
-      fill: "black"
+      fill: "red"
     });
 
 
@@ -61,6 +65,9 @@ class Scene2 extends Phaser.Scene {
     // Entablish limits game for the players cant leaves the screen
     this.player1.setCollideWorldBounds(true);
     this.player2.setCollideWorldBounds(true);
+
+    // Implements Players impact
+    this.physics.add.collider(this.player1, this.player2);
 
   } // End of create
 
