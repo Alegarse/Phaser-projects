@@ -22,11 +22,11 @@ class Scene1 extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 16
     });
-    this.load.spritesheet("power-up", "assets/spritesheets/power-up.png",{
-      frameWidth: 16,
-      frameHeight: 16
-    });
     this.load.spritesheet("player", "assets/spritesheets/player.png",{
+      frameWidth: 16,
+      frameHeight: 24
+    });
+    this.load.spritesheet("player2", "assets/spritesheets/player2.png",{
       frameWidth: 16,
       frameHeight: 24
     });
@@ -35,38 +35,36 @@ class Scene1 extends Phaser.Scene {
       frameHeight: 16
     });
 
-    // Load Font files
+    // 1.2 load the font fies
     this.load.bitmapFont("pixelFont", "assets/font/font.png", "assets/font/font.xml");
 
-    // Load sounds ( Formats .mp3 and .ogg)
+    // 1.1 load sounds in both formats mp3 and ogg
     this.load.audio("audio_beam", ["assets/sounds/beam.ogg", "assets/sounds/beam.mp3"]);
     this.load.audio("audio_explosion", ["assets/sounds/explosion.ogg", "assets/sounds/explosion.mp3"]);
     this.load.audio("audio_pickup", ["assets/sounds/pickup.ogg", "assets/sounds/pickup.mp3"]);
     this.load.audio("music", ["assets/sounds/sci-fi_platformer12.ogg", "assets/sounds/sci-fi_platformer12.mp3"]);
 
-
-    // #######################  PROGRESS BAR    ###########################################################
+        // #######################  PROGRESS BAR    ###########################################################
 
     // Create a background and prepare loading bar
-    this.cameras.main.setBackgroundColor(0x2a0503);
+    this.cameras.main.setBackgroundColor(0x2E2E2E);
     this.fullBar = this.add.graphics();
-    this.fullBar.fillStyle(0xda7a34, 1);
+    this.fullBar.fillStyle(0xC04911, 1);
     this.fullBar.fillRect((this.cameras.main.width / 4) - 2, (this.cameras.main.height / 2) - 18, (this.cameras.main.width / 2) + 4, 20);
     this.progress = this.add.graphics();
-    //this.textoporcentaje = this.add.text(16, 16, "",{fontSize:'32px',fill: '#FFFFFF'});
-    this.textoporcentaje = this.add.text(this.cameras.main.height / 2 - 2, this.cameras.main.width / 2 - 16, "",{fontSize:'32px',fill: '#FFFFFF'});
+    this.textoporcentaje = this.add.text(this.cameras.main.height / 2 -100, this.cameras.main.width / 2 - 80, "",{fontSize:'16px',fill: '#FF8000'});
 
     // Pass loading progress as value to loading bar and redraw as files load
     this.load.on('progress', function (value) {
       var percent = Math.floor(value*100) + "%";
-      this.textoporcentaje.setText(percent);
+      this.textoporcentaje.setText("Cargando juego: " +percent);
       this.progress.clear();
-      this.progress.fillStyle(0xfff6d3, 1);
+      this.progress.fillStyle(0x8C49D8, 1);
       this.progress.fillRect((this.cameras.main.width / 4), (this.cameras.main.height / 2) - 16, (this.cameras.main.width / 2) * value, 16);
     }, this);
 
     // Para ralentizar la barra de progreso
-    for(let i=1;i<1000;i++){
+    for(let i=1;i<900;i++){
       this.load.image('load'+i,
       '../../assets/images/background.png')
     }
@@ -78,8 +76,7 @@ class Scene1 extends Phaser.Scene {
     }, this);
 
     //##############################################################################################################################################
-
-  } // END OF PRELOAD
+  }
 
   create() {
     this.add.text(20, 20, "Loading game...");
@@ -113,26 +110,15 @@ class Scene1 extends Phaser.Scene {
     });
 
     this.anims.create({
-      key: "red",
-      frames: this.anims.generateFrameNumbers("power-up", {
-        start: 0,
-        end: 1
-      }),
-      frameRate: 20,
-      repeat: -1
-    });
-    this.anims.create({
-      key: "gray",
-      frames: this.anims.generateFrameNumbers("power-up", {
-        start: 2,
-        end: 3
-      }),
-      frameRate: 20,
-      repeat: -1
-    });
-    this.anims.create({
-      key: "thrust",
+      key: "player_anim",
       frames: this.anims.generateFrameNumbers("player"),
+      frameRate: 20,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: "player2_anim",
+      frames: this.anims.generateFrameNumbers("player2"),
       frameRate: 20,
       repeat: -1
     });

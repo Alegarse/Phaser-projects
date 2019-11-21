@@ -6,7 +6,7 @@ class End extends Phaser.Scene {
 
     create() {
 
-        this.add.text(60, 120, "GAME OVER",{font: "22px Arial"});
+        this.add.text(60, 120, "GAME OVER",{font: "22px Arial",color:"#FF0000"});
     }
 
 }
